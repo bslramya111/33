@@ -1,0 +1,96 @@
+SQL> create table shoopingmall(billid number(10),
+  2  custname varchar2(10),
+  3  phno number(10),
+  4  billamount number(15));
+
+Table created.
+
+SQL> insert into shoopingmall values(1,'srinu',70368616,1000);
+
+1 row created.
+
+SQL> insert into shoopingmall values(1,'vidya',81793829,5000);
+
+1 row created.
+
+SQL> insert into shoopingmall values(3,'sri',81793828,500);
+
+1 row created.
+
+SQL> insert into shoopingmall values(4,'bhuvana',73963222,6000);
+
+1 row created.
+
+SQL> select *from shoopingmall;
+
+    BILLID CUSTNAME         PHNO BILLAMOUNT
+---------- ---------- ---------- ----------
+         1 srinu        70368616       1000
+         1 vidya        81793829       5000
+         3 sri          81793828        500
+         4 bhuvana      73963222       6000
+SQL> create table shoppingmall1(billid number(10),
+  2  custname varchar2(10),
+  3  phno number(10),
+  4  billamount number(15));
+
+Table created.
+
+SQL> insert into shoppingmall1 values(1,'pushpa',7396322,7000);
+
+1 row created.
+
+SQL> insert into shoppingmall1 values(2,'swapna',83744561,700);
+
+1 row created.
+
+SQL> insert into shoppingmall1 values(3,'lakshmi',6309656,7500);
+
+1 row created.
+
+SQL> insert into shoppingmall1 values(4,'divya',6309657,8500);
+
+1 row created.
+
+SQL> select *from shoopingmall union select *from shoppingmall1;
+
+    BILLID CUSTNAME         PHNO BILLAMOUNT
+---------- ---------- ---------- ----------
+         1 pushpa        7396322       7000
+         1 srinu        70368616       1000
+         1 vidya        81793829       5000
+         2 swapna       83744561        700
+         3 lakshmi       6309656       7500
+         3 sri          81793828        500
+         4 bhuvana      73963222       6000
+         4 divya         6309657       8500
+
+8 rows selected.
+
+SQL> select *from shoopingmall intersect select *from shoppingmall1;
+
+no rows selected
+
+SQL> select *from shoopingmall minus select *from shoppingmall1;
+
+    BILLID CUSTNAME         PHNO BILLAMOUNT
+---------- ---------- ---------- ----------
+         1 srinu        70368616       1000
+         1 vidya        81793829       5000
+         3 sri          81793828        500
+         4 bhuvana      73963222       6000
+
+SQL> select billid,custname,phno,billamount *from shoopingmall intersect select billid,custname,phno,billamount *from shoppingmall1;
+select billid,custname,phno,billamount *from shoopingmall intersect select billid,custname,phno,billamount *from shoppingmall1
+                                        *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select billid,custname,phno,billamount from shoopingmall intersect select billid,custname,phno,billamount from shoppingmall1;
+
+no rows selected
+
+SQL> select billid,custname,phno,billamount from shoopingmall intersect select billid,custname,phno,billamount from shoppingmall1;
+
+no rows selected
